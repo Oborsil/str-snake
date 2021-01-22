@@ -27,6 +27,8 @@ interface IPiece {
    * 1. A this.type tulajdonságot beállítja a kapott type értékre.
    * 2. Meghívja a this.applyClass metódust a változtatások érvényesítéséhez.
    */
+
+   
   setType(type: string): void;
 
   /**
