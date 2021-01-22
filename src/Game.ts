@@ -18,6 +18,47 @@ import BaseGame from './BaseGame';
  */
 export default class Game extends BaseGame {
 
+  head: Piece;
+  tail: Piece;
+  food: Piece;
+  goldenApple: Piece;
+  length: number;
+  growth: number;
+  score: number;
+  currentLevel: Level;
+  garden: HTMLDivElement;
+
+  getRandomLevel() {
+    let index = Math.floor(Math.random()*this.levels.length);
+    return this.levels[index];
+  }
+
+  mayIHaveGoldenApple() {
+      let chance = 5;
+      let pick = Math.random()*100;
+      if (pick < chance) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    /**
+     * @returns {void}
+     * A metódus feladatai:
+     * 1. keresd meg a DOM -ban az összes .vertical-grid és .horizontal-grid 
+     * elemet
+     * 2. mentsd el őket egy grids nevű változóba
+     * 3. járd be a tömböt, és minden elemére hívd meg a Utils.removeNode 
+     * metódust, hogy eltávolítsd őket az oldalról
+     * 4. a this.gridVisible értékét állítsd false -ra
+     */
+    removeGrid () {
+      const grids = document.querySelectorAll('.vertical-grid' && '.horizontal-grid');
+      grids.forEach(element => Utils.removeNode(element));
+      this.gridVisible = false;
+    }
+
+
   constructor (private levels: Level[]) {
     super();
     this.head = new Piece({ x: 80, y: 80, type: 'head' });
