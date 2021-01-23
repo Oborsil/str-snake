@@ -53,7 +53,7 @@ export default class Game extends BaseGame {
      * 4. a this.gridVisible értékét állítsd false -ra
      */
     removeGrid () {
-      const grids = document.querySelectorAll('.vertical-grid' && '.horizontal-grid');
+      const grids = document.querySelectorAll('.vertical-grid' || '.horizontal-grid');
       grids.forEach(element => Utils.removeNode(element));
       this.gridVisible = false;
     }

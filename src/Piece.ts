@@ -76,16 +76,15 @@ export default class Piece implements IPiece {
   }
 
   isCollidingWith(node: Piece) {
-    if (node===null) {
-      return false
+    if (node == null) {
+      return false;
     }
-    else {
-      if (this.x === node.x && this.y===node.y) {
-        return true
-      } else {
-        return false
-      }
-    }
+
+    if (this.x == node.x && this.y == node.y) {
+        return true;
+    } 
+    
+    return false;
   }
 
   constructor({
@@ -104,7 +103,7 @@ export default class Piece implements IPiece {
     this.next = next;
     this.prev = prev;
     // Enable for a neat effect
-    // this.el.innerHTML = "&#10096;";
+    // öthis.el.innerHTML = "&#10096;";
     this.setType(type);
     this.setPos(this.x, this.y);
     this.garden = (document.getElementById('garden') as HTMLDivElement);
