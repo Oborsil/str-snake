@@ -197,14 +197,19 @@ export default class Game extends BaseGame {
     // If the there is no food, create a random one.
     if (this.food == null) {
       const [foodX, foodY] = this.getFoodLocation();
-      this.food = new Piece({ x: foodX, y: foodY, type: 'food' });
+      let random = Math.random()*100;
+      if (random<50) {
+        this.food = new Piece({ x: foodX, y: foodY, type: 'food' });
+      } else {
+        this.food = new Piece({ x: foodX, y: foodY, type: 'golden' });
+      }
     }
 
     // if head and food collided, replace head with the food
     // set the correct type for each piece
     if (this.head.isCollidingWith(this.food) || this.head.isCollidingWith(this.goldenApple)) {
       const type = this.head.isCollidingWith(this.food) ? 'food' : 'golden';
-
+      const type_str = (this.food.type === 'food' ? 'food' : 'golden');
       this.swallowFood(type);
 
       // Do not count baits grabbed while
@@ -213,7 +218,7 @@ export default class Game extends BaseGame {
         this.growth += 1; // Snake got bigger
       }
 
-      this.updateScore(type === 'food' ? 10 : 50); // Calculate the new score
+      this.updateScore(type_str === 'food' ? 1 : -2); // Calculate the new score
       this.showScore(); // Update the score
     }
   }
@@ -280,7 +285,9 @@ export default class Game extends BaseGame {
     }
 
     this.score += won;
-
+    if (this.score==20) {
+      this.score =0;
+    } 
     return this.score;
   }
 
